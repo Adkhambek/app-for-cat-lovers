@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import { Cat } from "../types";
+import Header from "./Header";
+import Main from "./Main";
 
-export default class App extends Component<{}, { cats: Cat[] }> {
-    constructor (props: {}) {
+class App extends Component<{}, { cats: Cat[] }> {
+    constructor(props: {}) {
         super(props);
         this.state = {
             cats: []
         };
     }
 
-    render () {
-        return <h1>Cat lovers</h1>;
+    render() {
+        return (
+            <>
+                <Header />
+                <Main />
+            </>
+        );
     }
 }
+
+export default App;
+
+// one class in one file
+// use Pure Components
+// public protected for methods
