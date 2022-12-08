@@ -5,3 +5,7 @@ export interface Cat {
     isHungry: boolean;
     hasCollar: boolean;
 }
+
+export interface catTypeInterface {
+    type: "new" | "owned";
+}

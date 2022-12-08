@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import { catTypeInterface } from "../types";
 import ownedCat from "../images/cat.png";
 import newCat from "../images/cry.png";
 import catFood from "../images/pet-food.png";
 import { ReactComponent as Paw } from "../images/paw.svg";
 
-class Cats extends Component {
+class Cats extends Component<catTypeInterface> {
     render() {
         return (
             <ul
