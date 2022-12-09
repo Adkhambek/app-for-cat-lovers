@@ -1,6 +1,6 @@
 # App for cat lovers
 
-# Demo:
+## Demo:
 
 https://app-for-cat-lovers.netlify.app/
 
