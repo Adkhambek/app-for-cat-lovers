@@ -16,7 +16,7 @@ class Cats extends Component<catsListInterface> {
         return (
             <ul
                 style={{ height: "420px" }}
-                className="list-group list-group-flush overflow-scroll overflow-auto"
+                className="list-group list-group-flush overflow-scroll"
             >
                 {cats.map((cat) => (
                     <li

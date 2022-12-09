@@ -1,5 +1,9 @@
 # App for cat lovers
 
+# Demo:
+
+https://app-for-cat-lovers.netlify.app/
+
 ## Task:
 
 Your neighbor likes cats very much, but she can't look for all her pets. You need to implement an application for her:
