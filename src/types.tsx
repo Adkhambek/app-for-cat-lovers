@@ -8,6 +8,7 @@ export interface Cat {
     feedTime: number;
 }
 
-export interface catTypeInterface {
+export interface catsListInterface {
     type: "new" | "owned";
+    cats: Cat[];
 }

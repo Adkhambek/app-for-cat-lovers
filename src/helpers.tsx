@@ -51,7 +51,6 @@ const catNames: string[] = [
 
 const colors: string[] = [
     "#000000",
-    "#FFFFFF",
     "#FF0000",
     "#00FF00",
     "#0000FF",
@@ -77,7 +76,7 @@ function generateRandomCat(): Cat {
     return {
         id,
         name: randomize(catNames),
-        age: Math.floor(Math.random() * 12),
+        age: Math.floor(Math.random() * 12) + 1,
         color: randomize(colors),
         isHungry: false,
         hasCollar: Math.random() > 0.5,

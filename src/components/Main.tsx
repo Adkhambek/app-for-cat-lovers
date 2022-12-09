@@ -1,13 +1,26 @@
 import React, { Component } from "react";
 import Cats from "./Cats";
 import { Cat } from "../types";
+import getCat from "../helpers";
 
 class Main extends Component<{}, { cats: Cat[] }> {
+    protected interval: undefined | ReturnType<typeof setInterval> = undefined;
     constructor(props: {}) {
         super(props);
         this.state = {
             cats: []
         };
+    }
+
+    componentDidMount(): void {
+        this.interval = setInterval(() => {
+            const cats: Cat[] = [...this.state.cats, getCat()];
+            this.setState({ cats });
+        }, 5000);
+    }
+
+    componentWillUnmount(): void {
+        clearInterval(this.interval);
     }
 
     render() {
@@ -19,7 +32,7 @@ class Main extends Component<{}, { cats: Cat[] }> {
                             <div className="card-header">
                                 <h2 className="text-center">New Cats</h2>
                             </div>
-                            <Cats type="new" />
+                            <Cats type="new" cats={this.state.cats} />
                         </div>
                     </div>
                     <div className="col">
@@ -29,7 +42,7 @@ class Main extends Component<{}, { cats: Cat[] }> {
                                     Neighbour&apos;s Cats
                                 </h2>
                             </div>
-                            <Cats type="owned" />
+                            <Cats type="owned" cats={this.state.cats} />
                         </div>
                     </div>
                 </div>
