@@ -16,16 +16,32 @@ class Main extends Component<{}, { cats: Cat[] }> {
 
     componentDidMount(): void {
         this.intervalId = setInterval(() => {
-            const newCat = getCat();
-            const cats: Cat[] = [...this.state.cats, newCat];
-            this.setState({ cats });
-            this.startFeedingCat(newCat.id);
+            this.generateRandomCat();
         }, 5000);
     }
 
     componentWillUnmount(): void {
         clearInterval(this.intervalId);
         this.state.cats.forEach((cat) => clearTimeout(cat.timeoutId));
+    }
+
+    protected feedCat = (id: number) => {
+        clearTimeout(this.state.cats.find((cat) => cat.id === id)?.timeoutId);
+
+        this.setState((prevState) => ({
+            cats: prevState.cats.map((cat) =>
+                cat.id === id ? { ...cat, isHungry: false } : cat
+            )
+        }));
+
+        this.startFeedingCat(id);
+    };
+
+    protected generateRandomCat() {
+        const newCat = getCat();
+        const cats: Cat[] = [...this.state.cats, newCat];
+        this.setState({ cats });
+        this.startFeedingCat(newCat.id);
     }
 
     protected startFeedingCat(id: number) {
@@ -59,7 +75,11 @@ class Main extends Component<{}, { cats: Cat[] }> {
                             <div className="card-header">
                                 <h2 className="text-center">New Cats</h2>
                             </div>
-                            <Cats type="new" cats={this.state.cats} />
+                            <Cats
+                                type="new"
+                                feedCat={this.feedCat}
+                                cats={this.state.cats}
+                            />
                         </div>
                     </div>
                     <div className="col">
@@ -69,7 +89,11 @@ class Main extends Component<{}, { cats: Cat[] }> {
                                     Neighbour&apos;s Cats
                                 </h2>
                             </div>
-                            <Cats type="owned" cats={this.state.cats} />
+                            <Cats
+                                feedCat={this.feedCat}
+                                type="owned"
+                                cats={this.state.cats}
+                            />
                         </div>
                     </div>
                 </div>

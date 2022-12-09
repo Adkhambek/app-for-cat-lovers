@@ -9,7 +9,7 @@ class Cats extends Component<catsListInterface> {
     render() {
         let cats;
         if (this.props.type === "owned") {
-            cats = this.props.cats.filter((cat) => cat.hasCollar === false);
+            cats = this.props.cats.filter((cat) => !cat.hasCollar);
         } else {
             cats = this.props.cats;
         }
@@ -25,18 +25,21 @@ class Cats extends Component<catsListInterface> {
                     >
                         <div
                             className={
-                                (cat.isHungry as boolean)
+                                cat.isHungry
                                     ? "position-absolute bg-dark bg-opacity-25 top-0 bottom-0 start-0 end-0 d-flex align-items-center justify-content-center"
                                     : "d-none"
                             }
                         >
-                            <button className="btn">
+                            <button
+                                className="btn"
+                                onClick={() => this.props.feedCat(cat.id)}
+                            >
                                 <img src={catFood} width="60" alt="" />
                             </button>
                         </div>
                         <img
                             width="60"
-                            src={(cat.hasCollar as boolean) ? ownedCat : newCat}
+                            src={cat.hasCollar ? ownedCat : newCat}
                             alt="collar"
                             className="img-fluid"
                         />

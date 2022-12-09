@@ -14,7 +14,3 @@ class App extends PureComponent {
 }
 
 export default App;
-
-// one class in one file
-// use Pure Components
-// public protected for methods
