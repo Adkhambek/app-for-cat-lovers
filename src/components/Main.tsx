@@ -4,7 +4,9 @@ import { Cat } from "../types";
 import getCat from "../helpers";
 
 class Main extends Component<{}, { cats: Cat[] }> {
-    protected interval: undefined | ReturnType<typeof setInterval> = undefined;
+    protected intervalId: undefined | ReturnType<typeof setInterval> =
+        undefined;
+
     constructor(props: {}) {
         super(props);
         this.state = {
@@ -13,14 +15,39 @@ class Main extends Component<{}, { cats: Cat[] }> {
     }
 
     componentDidMount(): void {
-        this.interval = setInterval(() => {
-            const cats: Cat[] = [...this.state.cats, getCat()];
+        this.intervalId = setInterval(() => {
+            const newCat = getCat();
+            const cats: Cat[] = [...this.state.cats, newCat];
             this.setState({ cats });
+            this.startFeedingCat(newCat.id);
         }, 5000);
     }
 
     componentWillUnmount(): void {
-        clearInterval(this.interval);
+        clearInterval(this.intervalId);
+        this.state.cats.forEach((cat) => clearTimeout(cat.timeoutId));
+    }
+
+    protected startFeedingCat(id: number) {
+        const timeoutId = setTimeout(() => {
+            const timeoutId = setTimeout(() => {
+                this.setState((prevState) => ({
+                    cats: prevState.cats.filter((cat) => cat.id !== id)
+                }));
+            }, 5000);
+
+            this.setState((prevState) => ({
+                cats: prevState.cats.map((cat) =>
+                    cat.id === id ? { ...cat, isHungry: true, timeoutId } : cat
+                )
+            }));
+        }, 30000);
+
+        this.setState((prevState) => ({
+            cats: prevState.cats.map((cat) =>
+                cat.id === id ? { ...cat, timeoutId } : cat
+            )
+        }));
     }
 
     render() {

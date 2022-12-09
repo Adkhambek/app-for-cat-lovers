@@ -80,7 +80,7 @@ function generateRandomCat(): Cat {
         color: randomize(colors),
         isHungry: false,
         hasCollar: Math.random() > 0.5,
-        feedTime: 30
+        timeoutId: undefined
     };
 }
 

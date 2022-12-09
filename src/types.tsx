@@ -5,7 +5,7 @@ export interface Cat {
     color: string;
     isHungry: boolean;
     hasCollar: boolean;
-    feedTime: number;
+    timeoutId: undefined | ReturnType<typeof setTimeout>;
 }
 
 export interface catsListInterface {
