@@ -10,6 +10,6 @@ export interface Cat {
 
 export interface catsListInterface {
     feedCat: (id: number) => void;
-    type: "new" | "owned";
+    isOwned: boolean;
     cats: Cat[];
 }

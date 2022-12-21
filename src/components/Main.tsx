@@ -80,7 +80,7 @@ class Main extends Component<{}, { cats: Cat[] }> {
                                 <h2 className="text-center">New Cats</h2>
                             </div>
                             <Cats
-                                type="new"
+                                isOwned={false}
                                 feedCat={this.feedCat}
                                 cats={this.state.cats}
                             />
@@ -95,7 +95,7 @@ class Main extends Component<{}, { cats: Cat[] }> {
                             </div>
                             <Cats
                                 feedCat={this.feedCat}
-                                type="owned"
+                                isOwned={true}
                                 cats={this.state.cats}
                             />
                         </div>

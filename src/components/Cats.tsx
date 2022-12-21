@@ -8,7 +8,7 @@ import { ReactComponent as Paw } from "../images/paw.svg";
 class Cats extends Component<catsListInterface> {
     render() {
         let cats;
-        if (this.props.type === "owned") {
+        if (this.props.isOwned as boolean) {
             cats = this.props.cats.filter((cat) => !cat.hasCollar);
         } else {
             cats = this.props.cats;
