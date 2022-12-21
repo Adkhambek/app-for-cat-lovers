@@ -12,6 +12,8 @@ class Main extends Component<{}, { cats: Cat[] }> {
         this.state = {
             cats: []
         };
+
+        this.feedCat = this.feedCat.bind(this);
     }
 
     componentDidMount(): void {
@@ -25,17 +27,19 @@ class Main extends Component<{}, { cats: Cat[] }> {
         this.state.cats.forEach((cat) => clearTimeout(cat.timeoutId));
     }
 
-    protected feedCat = (id: number) => {
+    protected feedCat(id: number) {
         clearTimeout(this.state.cats.find((cat) => cat.id === id)?.timeoutId);
 
-        this.setState((prevState) => ({
-            cats: prevState.cats.map((cat) =>
-                cat.id === id ? { ...cat, isHungry: false } : cat
-            )
-        }));
+        this.setState((prevState) => {
+            return {
+                cats: prevState.cats.map((cat) =>
+                    cat.id === id ? { ...cat, isHungry: false } : cat
+                )
+            };
+        });
 
         this.startFeedingCat(id);
-    };
+    }
 
     protected generateRandomCat() {
         const newCat = getCat();
