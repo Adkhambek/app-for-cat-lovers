@@ -49,24 +49,28 @@ class Main extends Component<{}, { cats: Cat[] }> {
     }
 
     protected startFeedingCat(id: number) {
-        const timeoutId = setTimeout(() => {
-            const timeoutId = setTimeout(() => {
-                this.setState((prevState) => ({
-                    cats: prevState.cats.filter((cat) => cat.id !== id)
-                }));
-            }, 5000);
-
-            this.setState((prevState) => ({
-                cats: prevState.cats.map((cat) =>
-                    cat.id === id ? { ...cat, isHungry: true, timeoutId } : cat
-                )
-            }));
-        }, 30000);
+        const timeoutId = setTimeout(() => this.showFood(id), 30000);
 
         this.setState((prevState) => ({
             cats: prevState.cats.map((cat) =>
                 cat.id === id ? { ...cat, timeoutId } : cat
             )
+        }));
+    }
+
+    protected showFood(id: number) {
+        const timeoutId = setTimeout(() => this.deleteUnfeededCat(id), 5000);
+
+        return this.setState((prevState) => ({
+            cats: prevState.cats.map((cat) =>
+                cat.id === id ? { ...cat, isHungry: true, timeoutId } : cat
+            )
+        }));
+    }
+
+    protected deleteUnfeededCat(id: number) {
+        return this.setState((prevState) => ({
+            cats: prevState.cats.filter((cat) => cat.id !== id)
         }));
     }
 
