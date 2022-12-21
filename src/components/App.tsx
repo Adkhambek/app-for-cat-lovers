@@ -1,16 +1,14 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import Header from "./Header";
 import Main from "./Main";
 
-class App extends PureComponent {
-    render() {
-        return (
-            <>
-                <Header />
-                <Main />
-            </>
-        );
-    }
-}
+const App = () => {
+    return (
+        <>
+            <Header />
+            <Main />
+        </>
+    );
+};
 
 export default App;
